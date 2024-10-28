@@ -2,11 +2,11 @@ import chess.pgn
 import json
 import random
 
-# pgn_file = open('chess_db_elo_1400_1600.pgn', 'r')
-pgn_file = open('chess_db_elo_2400_2600.pgn', 'r')
+pgn_file = open('chess_db_elo_1700_1900.pgn', 'r')
+# pgn_file = open('chess_db_elo_2400_2600.pgn', 'r')
 # pgn_file = open('chess_db_elo_2400_2600.pgn', 'r')
 
-with open('chess_db_elo_2400_2600.jsonl', 'w') as outfile:
+with open('chess_db_elo_1700_1900.jsonl', 'w') as outfile:
     while True:
         game = chess.pgn.read_game(pgn_file)
         if game is None:
@@ -26,6 +26,11 @@ with open('chess_db_elo_2400_2600.jsonl', 'w') as outfile:
             continue
 
         messages = []
+        messages.append({
+            "role": "system",
+            "content": "You are an expert chess player."
+        })
+
         board = game.board()
         move_number = 1
         move_count = 0
@@ -76,6 +81,12 @@ with open('chess_db_elo_2400_2600.jsonl', 'w') as outfile:
 
         if move_count < 10:
             continue
+
+        if messages[-1]['role'] == 'user':
+            messages.append({
+                "role": "assistant",
+                "content": result
+            })
 
         json.dump({"messages": messages}, outfile)
         outfile.write('\n')

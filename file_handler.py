@@ -14,5 +14,5 @@ def list_files():
     print(file)
 
 if __name__ == '__main__':
-  upload_file(filename='chess_db_elo_1700_1900_truncated.jsonl', purpose='fine-tune')
+  upload_file(filename='chess_db_elo_1700_1900_10_games.jsonl', purpose='fine-tune')
   # list_files()

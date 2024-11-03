@@ -1,3 +1,4 @@
 *.pgn
 *.jsonl
 stockfish
+test.py

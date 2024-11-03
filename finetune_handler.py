@@ -29,6 +29,6 @@ def finetune_delete(model_name):
 
 if __name__ == "__main__":
   # model = "gpt-4o-2024-08-06"
-  # file = "file-4eE8s68QghFyMDkCd25LzrVZ"
+  # file = "file-6Zg3YSVv1RwigTVsGqfTFdZT"
   # finetune_create(file=file, model=model)
   list_finetunes()

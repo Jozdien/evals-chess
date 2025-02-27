@@ -2,11 +2,11 @@ import chess.pgn
 import json
 import random
 
-pgn_file = open('chess_db_elo_1700_1900.pgn', 'r')
-# pgn_file = open('chess_db_elo_2400_2600.pgn', 'r')
+# pgn_file = open('chess_db_elo_1700_1900.pgn', 'r')
+pgn_file = open('chess_db_elo_2400_2600.pgn', 'r')
 # pgn_file = open('chess_db_elo_2400_2600.pgn', 'r')
 
-with open('chess_db_elo_1700_1900.jsonl', 'w') as outfile:
+with open('chess_db_elo_2400_2600.jsonl', 'w') as outfile:
     while True:
         game = chess.pgn.read_game(pgn_file)
         if game is None:
@@ -22,13 +22,13 @@ with open('chess_db_elo_1700_1900.jsonl', 'w') as outfile:
             continue
 
         termination = game.headers.get("Termination", "").lower()
-        if "abandoned" in termination or "unrated" in termination:
+        if "abandoned" in termination or "unrated" in termination or "time forfeit" in termination:
             continue
 
         messages = []
         messages.append({
             "role": "system",
-            "content": "You are an expert chess player."
+            "content": "You are an expert chess player. Please ONLY reply with your move response in full PGN notation (with the move number, etc), without any further text."
         })
 
         board = game.board()

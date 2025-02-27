@@ -1,4 +1,7 @@
 *.pgn
 *.jsonl
+*.txt
 stockfish
 test.py
+test_finetune.py
+test_large.py
